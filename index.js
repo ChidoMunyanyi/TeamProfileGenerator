@@ -18,6 +18,7 @@ const render = require("./src/page-template.js");
 // manager function to be called to start first
 
 let employeeArray = []
+
 function createEngineer() {
     inquirer.prompt([
         {
@@ -50,6 +51,70 @@ function createEngineer() {
     })
 }
 
+function createIntern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: 'What is the name of the intern?',
+            name: 'InternName',
+        },
+        {
+            type: "input",
+            message: 'What is the id for intern',
+            name: 'InternId',
+        },
+        {
+            type: 'input',
+            message: 'What is intern email?',
+            name: 'InternEmail',
+        },
+        {
+            type: "input",
+            message: 'What school does intern go?',
+            name: 'InternSchool',
+        },
+    
+    ])
+    .then(answers=>{
+        const newInstance = new Intern(answers.InternName, answers.InternId, answers.InternEmail, answers.InternSchool)
+        employeeArray.push(newInstance)
+        console.log(employeeArray)
+       addMember()
+    })
+}
+
+function createManager() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: 'What is the name of the manager?',
+            name: 'ManagerName',
+        },
+        {
+            type: "input",
+            message: 'What is the manager id?',
+            name: 'ManagerId',
+        },
+        {
+            type: 'input',
+            message: 'What is manager email?',
+            name: 'ManagerEmail',
+        },
+        {
+            type: "input",
+            message: 'Provide office number',
+            name: 'OfficeNumber',
+        },
+    
+    ])
+    .then(answers=>{
+        const newInstance = new Manager(answers.ManagerName, answers.ManagerId, answers.ManagerEmail, answers.OfficeNumber)
+        employeeArray.push(newInstance)
+        console.log(employeeArray)
+       addMember()
+    })
+}
+
 function addMember() {
     inquirer.prompt([
         {
@@ -63,7 +128,12 @@ function addMember() {
         if(answers.NewTeamMember==='Engineer') {
             createEngineer()
         }
-        // else if for Manager and Intern
+        else if(answers.NewTeamMember==='Intern') {
+            createIntern()
+        }
+        else if(answers.NewTeamMember==='Manager') {
+            createManager()
+        }
         else{
             fs.writeFileSync(outputPath, render(employeeArray))
         }
