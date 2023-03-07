@@ -23,29 +23,29 @@ function createEngineer() {
     inquirer.prompt([
         {
             type: "input",
-            message: 'What is the name of the engineer',
+            message: 'What is the name of the engineer?',
             name: 'EngineerName',
         },
         {
             type: "input",
-            message: 'What is the engineer id',
+            message: 'What is the engineer id?',
             name: 'EngineerId',
         },
         {
             type: 'input',
-            message: 'what is engineer email',
+            message: 'What is engineer email?',
             name: 'EngineerEmail',
         },
         {
             type: "input",
-            message: 'what is engineer github',
+            message: 'What is engineer github username?',
             name: 'EngineerGithub',
         },
     
     ])
     .then(answers=>{
-        const newInstance = new Engineer(answers.EngineerName, answers.EngineerId, answers.EngineerEmail, answers.EngineerGithub)
-        employeeArray.push(newInstance)
+        const newEng = new Engineer(answers.EngineerName, answers.EngineerId, answers.EngineerEmail, answers.EngineerGithub)
+        employeeArray.push(newEng)
         console.log(employeeArray)
        addMember()
     })
@@ -60,7 +60,7 @@ function createIntern() {
         },
         {
             type: "input",
-            message: 'What is the id for intern',
+            message: 'What is the id for Intern?',
             name: 'InternId',
         },
         {
@@ -76,8 +76,8 @@ function createIntern() {
     
     ])
     .then(answers=>{
-        const newInstance = new Intern(answers.InternName, answers.InternId, answers.InternEmail, answers.InternSchool)
-        employeeArray.push(newInstance)
+        const newIn= new Intern(answers.InternName, answers.InternId, answers.InternEmail, answers.InternSchool)
+        employeeArray.push(newIn)
         console.log(employeeArray)
        addMember()
     })
@@ -108,8 +108,8 @@ function createManager() {
     
     ])
     .then(answers=>{
-        const newInstance = new Manager(answers.ManagerName, answers.ManagerId, answers.ManagerEmail, answers.OfficeNumber)
-        employeeArray.push(newInstance)
+        const newMgr = new Manager(answers.ManagerName, answers.ManagerId, answers.ManagerEmail, answers.OfficeNumber)
+        employeeArray.push(newMgr)
         console.log(employeeArray)
        addMember()
     })
@@ -140,3 +140,6 @@ function addMember() {
     })
 
 }
+
+createManager();
+
